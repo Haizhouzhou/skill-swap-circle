@@ -31,11 +31,19 @@ export async function getListing(listingId: string): Promise<Listing> {
 
 export async function getListingDetail(listingId: string, userId?: string) {
   const listing = await getListing(listingId);
-  const [ownerDoc, medals, feedback] = await Promise.all([db.collection(collections.users).doc(listing.ownerUserId).get(), db.collection(collections.medalTypes).get(), db.collection(collections.feedback).get()]);
+  const [ownerDoc, medals, feedback, allListingsSnapshot, viewerDoc] = await Promise.all([
+    db.collection(collections.users).doc(listing.ownerUserId).get(),
+    db.collection(collections.medalTypes).get(),
+    db.collection(collections.feedback).get(),
+    db.collection(collections.listings).get(),
+    userId ? db.collection(collections.users).doc(userId).get() : Promise.resolve(null),
+  ]);
   const owner = ownerDoc.data() as User | undefined;
   if (!owner) throw notFound(`Owner ${listing.ownerUserId} not found`);
   const feedbackData = feedback.docs.map((doc) => doc.data() as Feedback).filter((f) => f.toUserId === owner.id);
-  return { listing, owner, visibleMedals: medals.docs.map((doc) => doc.data() as Medal).filter((m) => owner.visibleMedalIds.includes(m.id)), feedbackTags: [...new Set(feedbackData.flatMap((f) => f.tags))], recentFeedback: feedbackData.sort((a, b) => b.createdAt.localeCompare(a.createdAt)).slice(0, 5), similarListings: await getSimilarListings(listingId, 4), recommendedMatches: userId ? await getRecommendedMatchesForListing(listingId, userId, 3) : [] };
+  const allListings = allListingsSnapshot.docs.map((doc) => doc.data() as Listing).filter((entry) => entry.status === "active");
+  const viewer = viewerDoc?.data() as User | undefined;
+  return { listing, owner, visibleMedals: medals.docs.map((doc) => doc.data() as Medal).filter((m) => owner.visibleMedalIds.includes(m.id)), feedbackTags: [...new Set(feedbackData.flatMap((f) => f.tags))], recentFeedback: feedbackData.sort((a, b) => b.createdAt.localeCompare(a.createdAt)).slice(0, 5), similarListings: await getSimilarListings(listingId, 4), recommendedMatches: userId ? await getRecommendedMatchesForListing(listingId, userId, 3) : [], allListings, match: viewer ? await matchScoreFor(viewer, listing) : null };
 }
 
 export async function createListing(input: Omit<Listing, "id" | "source" | "ownerSessionId" | "searchText" | "createdAt" | "updatedAt">, context: DemoRequestContext): Promise<Listing> {

@@ -37,7 +37,7 @@ export async function recordSessionImpact(session: Session, feedback?: Feedback)
       medals.add("first_swap");
       if (userId === session.receiverUserId) medals.add("reliable_swapper");
       if (feedback?.tags.includes("patient")) medals.add("patient_helper");
-      await ref.update({ impactScore: Math.min(100, user.impactScore + delta), allMedalIds: [...medals], visibleMedalIds: [...new Set([...user.visibleMedalIds, "first_swap"])].filter((id) => medals.has(id)), updatedAt: now });
+      await ref.update({ impactScore: Math.min(100, user.impactScore + delta), points: (user.points ?? 0) + delta * 5, allMedalIds: [...medals], visibleMedalIds: [...new Set([...user.visibleMedalIds, "first_swap"])].filter((id) => medals.has(id)), updatedAt: now });
     }
   }
   await upsertAreaConnection(session);

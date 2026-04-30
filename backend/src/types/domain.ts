@@ -42,8 +42,11 @@ export type User = {
   interests: SkillCategory[];
   teachCategories: SkillCategory[];
   learnCategories: SkillCategory[];
+  teachSkills: string[];
+  learnSkills: string[];
   visibleMedalIds: string[];
   allMedalIds: string[];
+  points: number;
   impactScore: number;
   avatarSeed: string;
   createdAt: string;

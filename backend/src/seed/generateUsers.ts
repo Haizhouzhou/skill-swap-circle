@@ -1,6 +1,6 @@
 import type { User } from "../types/domain";
 import { SKILL_CATEGORIES } from "../types/domain";
-import { CITIES, FIRST_NAMES, LANGUAGE_SUGGESTIONS, MEDAL_DEFS } from "./constants";
+import { CITIES, FIRST_NAMES, LANGUAGE_SUGGESTIONS, MEDAL_DEFS, SKILLS_BY_CATEGORY } from "./constants";
 import { dateDaysAgo, int, pick, sample } from "./random";
 
 export const NAMED_DEMO_USER_IDS = ["user_sara", "user_lina", "user_omar", "user_maya", "user_noah"];
@@ -21,6 +21,8 @@ export function generateUsers(rand: () => number, total = 100): User[] {
     const name = FIRST_NAMES[i % FIRST_NAMES.length];
     const city = pick(rand, CITIES);
     const interests = sample(rand, SKILL_CATEGORIES, int(rand, 3, 5));
+    const teachCategories = sample(rand, interests, 2);
+    const learnCategories = sample(rand, SKILL_CATEGORIES, 2);
     const allMedalIds = sample(rand, medalIds, int(rand, 1, 6));
     users.push({
       id: `user_${String(i + 1).padStart(3, "0")}`,
@@ -32,10 +34,13 @@ export function generateUsers(rand: () => number, total = 100): User[] {
       languages: sample(rand, LANGUAGE_SUGGESTIONS, int(rand, 1, 3)),
       bio: `${name} is part of the Skillswap demo community in ${city.city}.`,
       interests,
-      teachCategories: sample(rand, interests, 2),
-      learnCategories: sample(rand, SKILL_CATEGORIES, 2),
+      teachCategories,
+      learnCategories,
+      teachSkills: skillsForCategories(rand, teachCategories, 3),
+      learnSkills: skillsForCategories(rand, learnCategories, 3),
       visibleMedalIds: allMedalIds.slice(0, 3),
       allMedalIds,
+      points: int(rand, 5, 95),
       impactScore: int(rand, 20, 99),
       avatarSeed: `seed_${i}`,
       createdAt: dateDaysAgo(int(rand, 10, 180)),
@@ -46,5 +51,14 @@ export function generateUsers(rand: () => number, total = 100): User[] {
 }
 
 function namedUser(id: string, name: string, email: string, city: string, canton: string, languages: string[], interests: User["interests"], teachCategories: User["teachCategories"], learnCategories: User["learnCategories"], impactScore: number, allMedalIds: string[]): User {
-  return { id, source: "seed", name, email, city, canton, languages, bio: `${name} swaps practical everyday skills from ${city}.`, interests, teachCategories, learnCategories, impactScore, allMedalIds, visibleMedalIds: allMedalIds.slice(0, 3), avatarSeed: id, createdAt: "", updatedAt: "" };
+  return { id, source: "seed", name, email, city, canton, languages, bio: `${name} swaps practical everyday skills from ${city}.`, interests, teachCategories, learnCategories, teachSkills: defaultSkillsForCategories(teachCategories, 2), learnSkills: defaultSkillsForCategories(learnCategories, 2), points: Math.max(5, Math.round(impactScore * 0.6)), impactScore, allMedalIds, visibleMedalIds: allMedalIds.slice(0, 3), avatarSeed: id, createdAt: "", updatedAt: "" };
+}
+
+function skillsForCategories(rand: () => number, categories: User["teachCategories"], count: number) {
+  const pool = [...new Set(categories.flatMap((category) => SKILLS_BY_CATEGORY[category] ?? []))];
+  return sample(rand, pool, count);
+}
+
+function defaultSkillsForCategories(categories: User["teachCategories"], count: number) {
+  return [...new Set(categories.flatMap((category) => SKILLS_BY_CATEGORY[category] ?? []))].slice(0, count);
 }

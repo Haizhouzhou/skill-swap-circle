@@ -22,6 +22,8 @@ export const createUserSchema = z.object({
   interests: z.array(skillCategory).default([]),
   teachCategories: z.array(skillCategory).default([]),
   learnCategories: z.array(skillCategory).default([]),
+  teachSkills: z.array(nonEmptyText.max(120)).default([]),
+  learnSkills: z.array(nonEmptyText.max(120)).default([]),
   avatarSeed: z.string().trim().max(80).optional(),
 });
 
@@ -53,7 +55,7 @@ export const createListingSchema = z.object({
 export const updateListingSchema = createListingSchema.partial().omit({ ownerUserId: true, type: true }).extend({ status: listingStatus.optional() });
 export const savedListingSchema = z.object({ listingId: nonEmptyText });
 export const listingViewSchema = z.object({ listingId: nonEmptyText });
-export const selectDemoUserSchema = z.object({ userId: nonEmptyText });
+export const selectDemoUserSchema = z.object({ userId: nonEmptyText.nullable() });
 export const matchScoreSchema = z.object({ userId: nonEmptyText, listingId: nonEmptyText });
 
 export const requestSessionSchema = z

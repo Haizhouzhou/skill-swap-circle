@@ -5,8 +5,8 @@ import { createUser, getUserDashboard, getUserProfile, listUsers, updateUser } f
 import type { SkillCategory } from "../types/domain";
 import { createUserSchema, updateUserSchema } from "../validation/schemas";
 export const usersRouter = Router();
-usersRouter.get("/users", asyncHandler(async (req, res) => { res.json({ data: await listUsers({ q: req.query.q ? String(req.query.q) : undefined, city: req.query.city ? String(req.query.city) : undefined, canton: req.query.canton ? String(req.query.canton) : undefined, language: req.query.language ? String(req.query.language) : undefined, category: req.query.category ? (String(req.query.category) as SkillCategory) : undefined, limit: req.query.limit ? Number(req.query.limit) : undefined }) }); }));
-usersRouter.post("/users", validateBody(createUserSchema), asyncHandler(async (req, res) => { res.status(201).json({ data: await createUser(req.body, req.demoContext) }); }));
+usersRouter.get("/users", asyncHandler(async (req, res) => { const items = await listUsers({ q: req.query.q ? String(req.query.q) : undefined, city: req.query.city ? String(req.query.city) : undefined, canton: req.query.canton ? String(req.query.canton) : undefined, language: req.query.language ? String(req.query.language) : undefined, category: req.query.category ? (String(req.query.category) as SkillCategory) : undefined, limit: req.query.limit ? Number(req.query.limit) : undefined }); res.json({ data: { items, nextCursor: null }, meta: { count: items.length } }); }));
+usersRouter.post("/users", validateBody(createUserSchema), asyncHandler(async (req, res) => { res.status(201).json({ data: { user: await createUser(req.body, req.demoContext) } }); }));
 usersRouter.get("/users/:userId", asyncHandler(async (req, res) => { res.json({ data: await getUserProfile(req.params.userId) }); }));
 usersRouter.patch("/users/:userId", validateBody(updateUserSchema), asyncHandler(async (req, res) => { res.json({ data: await updateUser(req.params.userId, req.body) }); }));
 usersRouter.get("/users/:userId/dashboard", asyncHandler(async (req, res) => { res.json({ data: await getUserDashboard(req.params.userId) }); }));
