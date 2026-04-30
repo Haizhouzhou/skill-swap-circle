@@ -51,17 +51,17 @@ export function ListingCard({ listing }: { listing: Listing }) {
         </div>
       )}
 
-      <footer className="flex items-center justify-between mt-1 pt-3 border-t border-borderSoft">
-        <Link to={`/profile/${owner?.id ?? listing.ownerUserId}`} className="flex items-center gap-2 group">
+      <footer className="flex flex-wrap items-center justify-between gap-3 mt-1 pt-3 border-t border-borderSoft">
+        <Link to={`/profile/${owner?.id ?? listing.ownerUserId}`} className="flex min-w-0 items-center gap-2 group">
           <span className="w-8 h-8 rounded-full bg-sand grid place-items-center font-serif text-moss text-sm">{owner?.name?.[0] ?? "?"}</span>
-          <span className="text-sm">
-            <span className="text-ink group-hover:text-moss transition-colors">{owner?.name ?? "Unknown user"}</span>
+          <span className="min-w-0 text-sm">
+            <span className="block truncate text-ink group-hover:text-moss transition-colors">{owner?.name ?? "Unknown user"}</span>
             {isOffer && owner && owner.visibleMedalIds.length > 0 && (
-              <span className="text-mutedInk ml-1">· {MEDAL_BY_ID[owner.visibleMedalIds[0]]?.title}</span>
+              <span className="block truncate text-mutedInk">· {MEDAL_BY_ID[owner.visibleMedalIds[0]]?.title}</span>
             )}
           </span>
         </Link>
-        <div className="flex items-center gap-2">
+        <div className="flex shrink-0 items-center gap-2">
           <Button asChild variant="ghost" size="sm" className="text-mutedInk hover:text-ink">
             <Link to={`/listing/${listing.id}`}>View</Link>
           </Button>
