@@ -1,3 +1,4 @@
+import { useDemoUser } from "@/context/DemoUserContext";
 import { useParams, Link } from "react-router-dom";
 import { USERS_BY_ID } from "@/mock/users";
 import { SEED_LISTINGS } from "@/mock/listings";
@@ -10,7 +11,8 @@ import { Mail } from "lucide-react";
 
 export default function PublicProfile() {
   const { userId } = useParams();
-  const user = userId ? USERS_BY_ID[userId] : null;
+  const { customUser } = useDemoUser();
+  const user = userId ? (USERS_BY_ID[userId] ?? (customUser?.id === userId ? customUser : null)) : null;
   if (!user) return <div className="container py-16"><p className="font-serif text-2xl">No such profile.</p></div>;
 
   const offers = SEED_LISTINGS.filter((l) => l.ownerUserId === user.id && l.type === "offer");
@@ -27,6 +29,26 @@ export default function PublicProfile() {
           <h1 className="font-serif text-3xl text-ink">{user.name}</h1>
           <p className="text-mutedInk">{user.city}, {user.canton} · {user.languages.join(", ")}</p>
           <p className="text-ink mt-3 leading-relaxed max-w-prose">{user.bio}</p>
+          {(user.teachSkills?.length || user.learnSkills?.length) ? (
+            <div className="mt-4 space-y-3">
+              {user.teachSkills && user.teachSkills.length > 0 && (
+                <div>
+                  <p className="text-xs uppercase tracking-wide text-mutedInk">Skills</p>
+                  <div className="mt-2 flex flex-wrap gap-2">
+                    {user.teachSkills.map((skill) => <span key={skill} className="chip">{skill}</span>)}
+                  </div>
+                </div>
+              )}
+              {user.learnSkills && user.learnSkills.length > 0 && (
+                <div>
+                  <p className="text-xs uppercase tracking-wide text-mutedInk">Wants to learn</p>
+                  <div className="mt-2 flex flex-wrap gap-2">
+                    {user.learnSkills.map((skill) => <span key={skill} className="chip">{skill}</span>)}
+                  </div>
+                </div>
+              )}
+            </div>
+          ) : null}
           <div className="flex flex-wrap items-center gap-2 mt-5">
             <span className="chip">Impact score · {user.impactScore}</span>
             {feedbackTags.slice(0, 4).map((t) => <span key={t} className="chip">{t}</span>)}

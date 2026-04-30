@@ -1,9 +1,10 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { DEMO_PERSONAS, useDemoUser } from "@/context/DemoUserContext";
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 
 export function DemoUserSelector({ open, onOpenChange }: { open: boolean; onOpenChange: (b: boolean) => void }) {
-  const { setUserId, user } = useDemoUser();
+  const { setUserId, user, customUser } = useDemoUser();
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="bg-card border-borderSoft rounded-2xl">
@@ -14,6 +15,16 @@ export function DemoUserSelector({ open, onOpenChange }: { open: boolean; onOpen
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-2 mt-2">
+          {customUser && (
+            <Button
+              variant="outline"
+              className={`justify-start h-auto py-3 rounded-xl border-borderSoft hover:bg-accent ${user?.id === customUser.id ? "bg-accent" : ""}`}
+              onClick={() => { setUserId(customUser.id); onOpenChange(false); }}
+            >
+              <span className="font-serif text-ink">Continue as {customUser.name}</span>
+              <span className="text-mutedInk text-sm ml-2">your profile</span>
+            </Button>
+          )}
           {DEMO_PERSONAS.map((p) => (
             <Button
               key={p.id}
@@ -31,6 +42,11 @@ export function DemoUserSelector({ open, onOpenChange }: { open: boolean; onOpen
             onClick={() => { setUserId(null); onOpenChange(false); }}
           >
             Continue as visitor
+          </Button>
+          <Button asChild variant="ghost" className="justify-start h-auto py-3 rounded-xl text-moss">
+            <Link to="/create-profile" onClick={() => onOpenChange(false)}>
+              Create my own profile
+            </Link>
           </Button>
         </div>
       </DialogContent>

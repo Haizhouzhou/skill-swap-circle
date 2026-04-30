@@ -22,6 +22,9 @@ export default function Landing() {
               Start as demo user
             </Button>
             <Button asChild variant="outline" className="rounded-full h-12 px-6 border-borderSoft">
+              <Link to="/create-profile">Create my profile</Link>
+            </Button>
+            <Button asChild variant="outline" className="rounded-full h-12 px-6 border-borderSoft">
               <Link to="/browse/learn">Browse skills</Link>
             </Button>
           </div>

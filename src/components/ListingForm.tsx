@@ -1,3 +1,5 @@
+import { format } from "date-fns";
+import { CalendarIcon } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDemoUser } from "@/context/DemoUserContext";
@@ -6,8 +8,11 @@ import { STORAGE } from "@/lib/storageKeys";
 import type { Listing, SkillCategory } from "@/mock/types";
 import { CATEGORIES, CITIES, LANGUAGES } from "@/mock/constants";
 import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
 import { Input } from "@/components/ui/input";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { useToast } from "@/hooks/use-toast";
+import { cn } from "@/lib/utils";
 
 export function ListingForm({ type }: { type: "offer" | "request" }) {
   const { user, promptDemoUser } = useDemoUser();
@@ -22,7 +27,8 @@ export function ListingForm({ type }: { type: "offer" | "request" }) {
   const [mode, setMode] = useState<"online" | "in_person" | "both">("both");
   const [city, setCity] = useState(user?.city ?? "Zürich");
   const [language, setLanguage] = useState(user?.languages?.[0] ?? "English");
-  const [availability, setAvailability] = useState("Saturday afternoon");
+  const [availabilityDate, setAvailabilityDate] = useState<Date | undefined>(nextAvailableDate());
+  const [availabilityTime, setAvailabilityTime] = useState("18:00");
   const [beginnerFriendly, setBeginnerFriendly] = useState(true);
   const [tagsRaw, setTagsRaw] = useState("");
 
@@ -37,7 +43,7 @@ export function ListingForm({ type }: { type: "offer" | "request" }) {
 
   function submit(e: React.FormEvent) {
     e.preventDefault();
-    if (!title.trim() || !user) return;
+    if (!title.trim() || !user || !availabilityDate) return;
     const cityObj = CITIES.find((c) => c.city === city) ?? CITIES[0];
     const newListing: Listing = {
       id: `${type}_user_${Date.now()}`,
@@ -52,7 +58,10 @@ export function ListingForm({ type }: { type: "offer" | "request" }) {
       mode: mode === "both" ? ["online", "in_person"] : [mode],
       languages: [language],
       durationMinutes: duration,
-      availability: [{ day: "Saturday", label: availability }],
+      availability: [{
+        day: format(availabilityDate, "EEEE") as Listing["availability"][number]["day"],
+        label: `${format(availabilityDate, "EEEE, d MMMM yyyy")} at ${availabilityTime}`,
+      }],
       level: "easy",
       beginnerFriendly,
       recommendedFor: type === "offer" ? ["newcomers"] : [],
@@ -105,7 +114,38 @@ export function ListingForm({ type }: { type: "offer" | "request" }) {
             </select>
           </Field>
           <Field label="Availability">
-            <Input value={availability} onChange={(e) => setAvailability(e.target.value)} placeholder="Saturday afternoon" />
+            <div className="space-y-2">
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    className={cn(
+                      "w-full justify-start rounded-xl border-borderSoft bg-cream px-3 text-left font-normal hover:bg-accent/40",
+                      !availabilityDate && "text-muted-foreground",
+                    )}
+                  >
+                    <CalendarIcon className="mr-2 h-4 w-4" />
+                    {availabilityDate ? format(availabilityDate, "EEEE, d MMMM yyyy") : "Pick a date"}
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-auto p-0" align="start">
+                  <Calendar
+                    mode="single"
+                    selected={availabilityDate}
+                    onSelect={setAvailabilityDate}
+                    disabled={(date) => isBeforeToday(date)}
+                    initialFocus
+                  />
+                </PopoverContent>
+              </Popover>
+              <Input
+                type="time"
+                value={availabilityTime}
+                onChange={(event) => setAvailabilityTime(event.target.value)}
+                className="rounded-xl border-borderSoft bg-cream"
+              />
+            </div>
           </Field>
         </div>
         <Field label={isOffer ? "What someone will learn" : "What you need help with"}>
@@ -139,4 +179,17 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
       {children}
     </div>
   );
+}
+
+function nextAvailableDate() {
+  const date = new Date();
+  date.setHours(0, 0, 0, 0);
+  date.setDate(date.getDate() + 1);
+  return date;
+}
+
+function isBeforeToday(date: Date) {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  return date < today;
 }

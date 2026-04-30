@@ -1,5 +1,6 @@
 export const STORAGE = {
   selectedUserId: "skillswap:selectedUserId",
+  customProfile: "skillswap:customProfile",
   savedListings: "skillswap:savedListings",
   createdListings: "skillswap:createdListings",
   medalVisibility: "skillswap:medalVisibility",

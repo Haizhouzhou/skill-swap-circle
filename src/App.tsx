@@ -14,6 +14,7 @@ import PublicProfile from "./pages/PublicProfile";
 import Dashboard from "./pages/Dashboard";
 import CreateOffer from "./pages/CreateOffer";
 import CreateRequest from "./pages/CreateRequest";
+import CreateProfile from "./pages/CreateProfile";
 import MedalSettings from "./pages/MedalSettings";
 import ChatPage from "./pages/ChatPage";
 import Impact from "./pages/Impact";
@@ -36,6 +37,7 @@ const App = () => (
               <Route path="/listing/:id" element={<ListingPage />} />
               <Route path="/profile/:userId" element={<PublicProfile />} />
               <Route path="/me" element={<Dashboard />} />
+              <Route path="/create-profile" element={<CreateProfile />} />
               <Route path="/me/create-offer" element={<CreateOffer />} />
               <Route path="/me/create-request" element={<CreateRequest />} />
               <Route path="/me/medals" element={<MedalSettings />} />

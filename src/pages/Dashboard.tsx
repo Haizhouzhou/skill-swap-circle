@@ -54,7 +54,7 @@ export default function Dashboard() {
         </div>
         <div className="flex flex-col gap-2">
           <Button onClick={() => navigate("/me/create-offer")} className="bg-moss text-cream hover:bg-ink rounded-full">Share something I know</Button>
-          <Button variant="outline" onClick={() => navigate("/me/create-request")} className="rounded-full border-borderSoft">Ask for a little help</Button>
+          <Button variant="outline" onClick={() => navigate("/me/create-request")} className="rounded-full border-borderSoft">Publish a learning request</Button>
           <Button variant="ghost" onClick={() => navigate("/me/medals")} className="rounded-full text-mutedInk">Manage medals</Button>
         </div>
       </header>

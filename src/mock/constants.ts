@@ -13,7 +13,27 @@ export const CITIES: { city: string; canton: string }[] = [
   { city: "Fribourg", canton: "FR" },
 ];
 
-export const LANGUAGES = ["German", "French", "Italian", "English"] as const;
+export const LANGUAGES = [
+  "German",
+  "French",
+  "Italian",
+  "English",
+  "Spanish",
+  "Portuguese",
+  "Dutch",
+  "Romanian",
+  "Polish",
+  "Ukrainian",
+  "Russian",
+  "Arabic",
+  "Turkish",
+  "Albanian",
+  "Greek",
+  "Mandarin Chinese",
+  "Japanese",
+  "Korean",
+  "Hindi",
+] as const;
 
 export const CATEGORIES: SkillCategory[] = [
   "Swiss life",

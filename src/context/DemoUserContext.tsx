@@ -8,8 +8,10 @@ import { Button } from "@/components/ui/button";
 
 type Ctx = {
   user: User | null;
+  customUser: User | null;
   isVisitor: boolean;
   setUserId: (id: string | null) => void;
+  setCustomUser: (user: User | null) => void;
   promptDemoUser: (reason?: string) => void;
 };
 
@@ -25,14 +27,20 @@ const PERSONAS = [
 
 export function DemoUserProvider({ children }: { children: ReactNode }) {
   const [selectedId, setSelectedId] = useLocalStorage<string | null>(STORAGE.selectedUserId, null);
+  const [customUser, setCustomUser] = useLocalStorage<User | null>(STORAGE.customProfile, null);
   const [promptOpen, setPromptOpen] = useState(false);
   const [reason, setReason] = useState<string | undefined>(undefined);
 
   const user = useMemo(() => {
     if (!selectedId) return null;
-    if (!NAMED_USER_IDS.includes(selectedId)) return null;
-    return USERS_BY_ID[selectedId] ?? null;
-  }, [selectedId]);
+    if (NAMED_USER_IDS.includes(selectedId)) {
+      return USERS_BY_ID[selectedId] ?? null;
+    }
+    if (customUser?.id === selectedId) {
+      return customUser;
+    }
+    return null;
+  }, [customUser, selectedId]);
 
   const setUserId = useCallback((id: string | null) => {
     setSelectedId(id);
@@ -45,7 +53,7 @@ export function DemoUserProvider({ children }: { children: ReactNode }) {
   }, []);
 
   return (
-    <DemoUserContext.Provider value={{ user, isVisitor: !user, setUserId, promptDemoUser }}>
+    <DemoUserContext.Provider value={{ user, customUser, isVisitor: !user, setUserId, setCustomUser, promptDemoUser }}>
       {children}
       <Dialog open={promptOpen} onOpenChange={setPromptOpen}>
         <DialogContent className="bg-card border-borderSoft rounded-2xl">
