@@ -3,77 +3,188 @@
 > **A circular economy of knowledge where everyone teaches and everyone learns**
 
 [![Live Demo](https://img.shields.io/badge/demo-live-success)](https://skill-swap-circle.vercel.app/)
-[![Hackathon](https://img.shields.io/badge/hackathon-2024-blue)](https://github.com/Haizhouzhou/skill-swap-circle)
+[![IBM Hackathon 2026](https://img.shields.io/badge/IBM%20Hackathon-2026-blue)](https://github.com/Haizhouzhou/skill-swap-circle)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
-[🌐 Live Demo](https://skill-swap-circle.vercel.app/) | [📖 User Story](https://www.notion.so/User-story-352dc30f9ae4803894edf13606433d66) | [🛠️ Tech Plan](https://www.notion.so/Tech-plan-352dc30f9ae480c1bc45cb783ddf9590)
+**🏆 IBM Hackathon 2026 Submission**
+
+[🌐 Live Demo](https://skill-swap-circle.vercel.app/) | [📖 User Story](https://www.notion.so/User-story-352dc30f9ae4803894edf13606433d66) | [🛠️ Tech Plan](https://www.notion.so/Tech-plan-352dc30f9ae480c1bc45cb783ddf9590) | [📂 GitHub](https://github.com/Haizhouzhou/skill-swap-circle)
+
+---
+
+## 📖 Table of Contents
+
+- [The Problem](#-the-problem)
+- [Our Solution](#-our-solution)
+- [How It Works](#-how-it-works)
+- [Key Features](#-key-features)
+- [Architecture](#️-architecture)
+- [Tech Stack](#-tech-stack)
+- [Getting Started](#-getting-started)
+- [Roadmap](#️-roadmap)
+- [Team](#-team)
 
 ---
 
 ## 🎯 The Problem
 
-Education is broken:
-- 💰 **Expensive**: Online courses cost $200+, degrees cost $50K+
-- 🚫 **Inaccessible**: 750M adults worldwide lack access to education
-- ⬇️ **One-Way**: Traditional learning is passive, not interactive
-- 😔 **Isolating**: People learn alone without community support
+Education today faces critical challenges:
 
-**What if we could fix this?**
+```
+┌─────────────────────────────────────────────────────┐
+│                                                     │
+│  💰  Expensive                                      │
+│      Online courses: $200+                          │
+│      Degrees: $50,000+                              │
+│                                                     │
+│  🚫  Inaccessible                                   │
+│      750M adults lack basic education               │
+│      Billions can't afford quality learning         │
+│                                                     │
+│  ⬇️   One-Way                                       │
+│      Passive consumption                            │
+│      No knowledge exchange                          │
+│                                                     │
+│  😔  Isolating                                      │
+│      Learn alone                                    │
+│      No community support                           │
+│                                                     │
+└─────────────────────────────────────────────────────┘
+```
+
+**The Core Issue**: Everyone has skills to teach AND skills to learn, but there's no easy way to exchange them.
 
 ---
 
 ## 💡 Our Solution
 
-**SkillSwap Circle** creates a circular economy where:
-- You teach what you know 🎸
-- You learn what you need 🇪🇸
-- Everyone wins 🎉
+**SkillSwap Circle** creates a circular economy of knowledge where:
+- 🎸 You teach what you know
+- 🇪🇸 You learn what you need  
+- 🎉 Everyone wins
+
+### The Circular Model
 
 ```
-┌─────────────────────────────────────────────┐
-│                                             │
-│  Sarah teaches Guitar → Carlos learns      │
-│     ↓                                       │
-│  Carlos teaches Spanish → Sarah learns     │
-│     ↓                                       │
-│  Both earn Karma → Both grow → Repeat!     │
-│                                             │
-└─────────────────────────────────────────────┘
+                    ┌─────────────────┐
+                    │   Sarah         │
+                    │   Teaches: 🎸   │
+                    │   Wants: 🇪🇸     │
+                    └────────┬────────┘
+                             │
+                    ┌────────▼────────┐
+                    │  Smart Matching │
+                    │    Algorithm    │
+                    └────────┬────────┘
+                             │
+                    ┌────────▼────────┐
+                    │   Carlos        │
+                    │   Teaches: 🇪🇸   │
+                    │   Wants: 🎸      │
+                    └────────┬────────┘
+                             │
+                    ┌────────▼────────┐
+                    │  Skill Exchange │
+                    │   30-min video  │
+                    └────────┬────────┘
+                             │
+                    ┌────────▼────────┐
+                    │  Both Learn &   │
+                    │  Earn Karma 🏆  │
+                    └─────────────────┘
+```
+
+### Why It Works
+
+| Traditional Learning | SkillSwap Circle |
+|---------------------|------------------|
+| 💰 $200+ per course | 💚 Free |
+| ⬇️ One-way | 🔄 Bidirectional |
+| 😔 Alone | 🤝 Community |
+| 📚 Passive | 📹 Interactive |
+| ❌ No motivation | 🎮 Gamified |
+
+---
+
+## 🔄 How It Works
+
+### User Journey
+
+```
+Step 1: Sign Up (90 seconds)
+┌─────────────────────────────────┐
+│ • Create account                │
+│ • List 3 skills you can teach   │
+│ • List 3 skills you want        │
+└─────────────────────────────────┘
+              ↓
+Step 2: Get Matched (60 seconds)
+┌─────────────────────────────────┐
+│ • AI finds compatible partners  │
+│ • Based on skills & availability│
+│ • See profile & reviews         │
+└─────────────────────────────────┘
+              ↓
+Step 3: Exchange Skills (30 min)
+┌─────────────────────────────────┐
+│ • Schedule session              │
+│ • Video chat (15 min each way)  │
+│ • Interactive learning          │
+└─────────────────────────────────┘
+              ↓
+Step 4: Grow Together
+┌─────────────────────────────────┐
+│ • Rate experience               │
+│ • Earn karma points             │
+│ • Build your network            │
+│ • Pass knowledge forward        │
+└─────────────────────────────────┘
 ```
 
 ---
 
 ## ✨ Key Features
 
-### 🎮 Gamification System
-- **Karma Points**: Earn points for every session (teaching +10, learning +5)
-- **Achievement Badges**: Unlock milestones like "First Teacher" and "Master Teacher"
-- **Leaderboards**: Compete with the community
-- **Streaks**: Build learning habits with consecutive day tracking
-
 ### 🤝 Smart Matching
-- AI-powered algorithm matches you with perfect skill partners
-- Considers skills, time zones, and learning styles
-- Find your match in under 60 seconds
+- AI-powered algorithm pairs you with compatible skill partners
+- Considers skills, time zones, learning styles, and availability
+- Find your perfect match in under 60 seconds
 
-### 📹 Built-in Video Chat
-- No Zoom, no Skype - everything in one place
-- High-quality WebRTC video sessions
-- Screen sharing for better teaching
+### 🎮 Gamification
+- **Karma Points**: Earn points for teaching and learning
+- **Achievement Badges**: Unlock milestones as you progress
+- **Leaderboards**: See top contributors in the community
+- **Streaks**: Build learning habits with daily tracking
 
-### 📊 Impact Dashboard
-Track your contribution:
+### 📊 Impact Tracking
+Track your contribution to the community:
 - ⏰ Hours of knowledge shared
-- 👥 People you've helped
-- 💰 Money saved by the community
-- 🌱 CO2 prevented vs traditional classes
+- 👥 Number of people helped
+- 💰 Money saved (vs traditional courses)
+- 🌱 Environmental impact (CO2 saved)
 
 ### 🔗 Skill Chains
-Watch your knowledge spread:
+Watch your knowledge spread exponentially:
+
 ```
-You → Person A → Person B → Person C → Person D
-1 skill taught = 5+ people impacted exponentially
+                You (Guitar)
+                     │
+                     ↓
+               Carlos (Spanish)
+                ↙         ↘
+               ↓           ↓
+        Maria (Cooking)  Tom (Coding)
+            ↓               ↓
+       Lisa (Design)   Sam (Photo)
+
+1 skill taught → 5+ people impacted
 ```
+
+### 🌍 Community Features
+- User profiles with skills and reviews
+- Session scheduling and reminders
+- In-app messaging
+- Community guidelines and safety
 
 ---
 
@@ -82,56 +193,76 @@ You → Person A → Person B → Person C → Person D
 ### System Overview
 
 ```
-┌─────────────────────────────────────────────────────────┐
-│                     Frontend (Next.js)                  │
-│  ┌──────────┐  ┌──────────┐  ┌──────────┐             │
-│  │  Auth    │  │ Matching │  │  Video   │             │
-│  │  System  │  │  Engine  │  │  Chat    │             │
-│  └──────────┘  └──────────┘  └──────────┘             │
-└─────────────────────────────────────────────────────────┘
-                         ↕
-┌─────────────────────────────────────────────────────────┐
-│                  Backend API (Node.js)                  │
-│  ┌──────────┐  ┌──────────┐  ┌──────────┐             │
-│  │  User    │  │  Skill   │  │  Karma   │             │
-│  │  Service │  │  Service │  │  Service │             │
-│  └──────────┘  └──────────┘  └──────────┘             │
-└─────────────────────────────────────────────────────────┘
-                         ↕
-┌─────────────────────────────────────────────────────────┐
-│              Database (PostgreSQL)                      │
-│  ┌──────────┐  ┌──────────┐  ┌──────────┐             │
-│  │  Users   │  │  Skills  │  │ Sessions │             │
-│  │  Table   │  │  Table   │  │  Table   │             │
-│  └──────────┘  └──────────┘  └──────────┘             │
-└─────────────────────────────────────────────────────────┘
+┌───────────────────────────────────────────────────┐
+│              Frontend (React/Next.js)             │
+│  ┌──────────┐  ┌──────────┐  ┌──────────┐       │
+│  │   Auth   │  │ Matching │  │  Profile │       │
+│  │    UI    │  │    UI    │  │    UI    │       │
+│  └────┬─────┘  └────┬─────┘  └────┬─────┘       │
+└───────┼─────────────┼─────────────┼──────────────┘
+        │             │             │
+        │      REST API / WebSocket │
+        │             │             │
+┌───────▼─────────────▼─────────────▼──────────────┐
+│           Backend (Node.js/Express)              │
+│  ┌──────────┐  ┌──────────┐  ┌──────────┐       │
+│  │   Auth   │  │ Matching │  │   User   │       │
+│  │ Service  │  │  Engine  │  │ Service  │       │
+│  └────┬─────┘  └────┬─────┘  └────┬─────┘       │
+└───────┼─────────────┼─────────────┼──────────────┘
+        │             │             │
+        │      Database Queries     │
+        │             │             │
+┌───────▼─────────────▼─────────────▼──────────────┐
+│            Database (PostgreSQL)                 │
+│  ┌──────────┐  ┌──────────┐  ┌──────────┐       │
+│  │  Users   │  │  Skills  │  │ Sessions │       │
+│  └──────────┘  └──────────┘  └──────────┘       │
+└──────────────────────────────────────────────────┘
 ```
 
-### Tech Stack
+---
 
-**Frontend:**
-- ⚛️ React/Next.js - Fast, SEO-friendly UI
-- 🎨 Tailwind CSS - Beautiful, responsive design
-- 📹 WebRTC - Peer-to-peer video chat
-- 📊 Chart.js - Impact visualizations
+## 🛠 Tech Stack
 
-**Backend:**
-- 🟢 Node.js/Express - Scalable API
-- 🗄️ PostgreSQL - Reliable data storage
-- 🔐 JWT - Secure authentication
-- 🔄 Socket.io - Real-time features
+### Frontend
+```
+⚛️  React/Next.js      - Modern UI framework
+🎨  Tailwind CSS       - Responsive styling
+📊  Chart.js           - Data visualizations
+🔐  NextAuth.js        - Authentication
+```
 
-**Infrastructure:**
-- ☁️ Vercel - Global edge deployment
-- 🌐 CDN - Fast worldwide access
-- 📈 Analytics - User behavior tracking
-- 🔒 SSL - Encrypted connections
+### Backend
+```
+🟢  Node.js/Express    - API server
+🗄️  PostgreSQL         - Database
+🔒  JWT                - Secure tokens
+📧  SendGrid           - Email notifications
+```
+
+### Infrastructure
+```
+☁️  Vercel             - Hosting & deployment
+🌐  CDN                - Global content delivery
+📈  Analytics          - User tracking
+🔒  SSL/TLS            - Encrypted connections
+```
+
+### Development Tools
+```
+📝  TypeScript         - Type safety
+🧪  Jest               - Testing
+🎯  ESLint             - Code quality
+🔄  GitHub Actions     - CI/CD
+```
 
 ---
 
 ## 🚀 Getting Started
 
 ### Prerequisites
+
 ```bash
 node >= 18.0.0
 npm >= 9.0.0
@@ -154,16 +285,20 @@ npm install
 3. **Set up environment variables**
 ```bash
 cp .env.example .env
-# Edit .env with your configuration
+# Edit .env with your configuration:
+# - DATABASE_URL
+# - NEXTAUTH_SECRET
+# - NEXTAUTH_URL
 ```
 
 4. **Set up the database**
 ```bash
 npm run db:setup
 npm run db:migrate
+npm run db:seed
 ```
 
-5. **Start the development server**
+5. **Start development server**
 ```bash
 npm run dev
 ```
@@ -173,207 +308,188 @@ npm run dev
 http://localhost:3000
 ```
 
----
+### Available Scripts
 
-## 📱 User Flow
-
-### 1. Sign Up (90 seconds)
+```bash
+npm run dev          # Start development server
+npm run build        # Build for production
+npm run start        # Start production server
+npm run test         # Run tests
+npm run lint         # Check code quality
 ```
-┌─────────────────────────────────────┐
-│  Enter email & password             │
-│  ↓                                  │
-│  List 3 skills you can teach        │
-│  ↓                                  │
-│  List 3 skills you want to learn    │
-│  ↓                                  │
-│  Done! Ready to match               │
-└─────────────────────────────────────┘
-```
-
-### 2. Get Matched (45 seconds)
-```
-┌─────────────────────────────────────┐
-│  AI analyzes your skills            │
-│  ↓                                  │
-│  Finds compatible partners          │
-│  ↓                                  │
-│  Shows best matches                 │
-│  ↓                                  │
-│  Click to connect                   │
-└─────────────────────────────────────┘
-```
-
-### 3. Exchange Skills (30 minutes)
-```
-┌─────────────────────────────────────┐
-│  Schedule session                   │
-│  ↓                                  │
-│  Join video chat                    │
-│  ↓                                  │
-│  Teach your skill (15 min)          │
-│  ↓                                  │
-│  Learn their skill (15 min)         │
-│  ↓                                  │
-│  Rate & earn karma                  │
-└─────────────────────────────────────┘
-```
-
-### 4. Track Impact
-```
-┌─────────────────────────────────────┐
-│  View your dashboard                │
-│  ↓                                  │
-│  See hours taught                   │
-│  ↓                                  │
-│  See people helped                  │
-│  ↓                                  │
-│  See money saved                    │
-│  ↓                                  │
-│  Share your impact                  │
-└─────────────────────────────────────┘
-```
-
----
-
-## 🎮 Gamification System
-
-### Karma Points
-| Action | Points |
-|--------|--------|
-| Complete teaching session | +10 |
-| Complete learning session | +5 |
-| First session of the day | +2 |
-| 7-day streak | +20 |
-| Refer a friend | +15 |
-| Complete skill chain | +25 |
-
-### Achievement Badges
-
-| Badge | Requirement | Icon |
-|-------|-------------|------|
-| First Teacher | Complete 1 teaching session | 🎓 |
-| Knowledge Seeker | Complete 5 learning sessions | 📚 |
-| Community Builder | Refer 3 friends | 🤝 |
-| Master Teacher | Complete 10 teaching sessions | 👨‍🏫 |
-| Skill Chain Champion | Create a 5-person skill chain | 🔗 |
-| Streak Master | Maintain 30-day streak | 🔥 |
-
-### Leaderboards
-
-**Weekly Top Contributors**
-```
-┌─────┬──────────────┬────────┬─────────┐
-│ Rank│ User         │ Karma  │ Sessions│
-├─────┼──────────────┼────────┼─────────┤
-│  1  │ Sarah M.     │ 1,250  │   47    │
-│  2  │ Carlos R.    │ 1,100  │   42    │
-│  3  │ Mike T.      │   980  │   38    │
-└─────┴──────────────┴────────┴─────────┘
-```
-
----
-
-## 📊 Impact Metrics
-
-### Community Impact (Current)
-- 📚 **1,000+ skills** shared
-- 👥 **500+ active users** across 50 countries
-- ⏰ **10,000+ hours** of learning created
-- 💰 **$250K+ saved** in course fees
-- 🌱 **500kg CO2** prevented vs traditional classes
-- ⭐ **4.9/5** average session rating
-- 🔗 **50+ skill chains** created
-- 🔥 **65%** 7-day retention rate
-
-### Personal Impact Example
-```
-┌─────────────────────────────────────────┐
-│  Your Impact Dashboard                  │
-├─────────────────────────────────────────┤
-│  ⏰ 47 hours of learning created        │
-│  👥 23 people helped                    │
-│  💰 $4,700 saved by community           │
-│  🌱 15kg CO2 prevented                  │
-│  🔗 3 skill chains started              │
-│  🏆 1,250 karma points earned           │
-└─────────────────────────────────────────┘
-```
-
----
-
-## 🔗 Skill Chains Visualization
-
-```
-                    You (Guitar)
-                         │
-                         ↓
-                   Carlos (Spanish)
-                    ↙         ↘
-                   ↓           ↓
-            Maria (Cooking)  Tom (Coding)
-                ↓               ↓
-           Lisa (Design)   Sam (Photography)
-```
-
-**Impact Multiplier**: 1 skill taught → 5+ people impacted
 
 ---
 
 ## 🛣️ Roadmap
 
-### ✅ Phase 1: MVP (Completed)
-- [x] User authentication
-- [x] Skill matching algorithm
-- [x] Video chat integration
-- [x] Karma points system
-- [x] Basic gamification
+### Current Status (Hackathon MVP)
 
-### 🚧 Phase 2: Growth (In Progress)
-- [x] Achievement badges
-- [x] Leaderboards
-- [x] Impact dashboard
-- [ ] Social sharing
-- [ ] Referral system
+```
+┌─────────────────────────────────────────────────┐
+│ ✅ Completed Features                           │
+├─────────────────────────────────────────────────┤
+│ • User authentication & profiles                │
+│ • Skill listing (teach/learn)                   │
+│ • Basic matching algorithm                      │
+│ • User interface & navigation                   │
+│ • Database schema & models                      │
+│ • Deployment pipeline                           │
+└─────────────────────────────────────────────────┘
+```
 
-### 📅 Phase 3: Scale (Q2 2024)
-- [ ] Mobile app (iOS/Android)
-- [ ] Team challenges
-- [ ] Skill certifications
-- [ ] Company partnerships
-- [ ] Multi-language support
+### Future Enhancements
 
-### 🔮 Phase 4: Ecosystem (Q3 2024)
-- [ ] Employer recognition
-- [ ] Skill verification
-- [ ] API for integrations
-- [ ] Community events
-- [ ] Global expansion
+```
+Phase 1: Core Features (Post-Hackathon)
+├─ Video chat integration
+├─ Session scheduling
+├─ Rating & review system
+├─ Karma points system
+└─ Achievement badges
+
+Phase 2: Growth Features
+├─ Advanced matching algorithm
+├─ Skill chains tracking
+├─ Impact dashboard
+├─ Social sharing
+└─ Referral system
+
+Phase 3: Scale
+├─ Mobile apps (iOS/Android)
+├─ Multi-language support
+├─ Team challenges
+├─ Company partnerships
+└─ Skill certifications
+
+Phase 4: Ecosystem
+├─ Employer recognition
+├─ Public API
+├─ Community events
+├─ Global expansion
+└─ Skill verification
+```
+
+---
+
+## 🎯 IBM Hackathon 2026
+
+### Challenge: "Build an Interactive Web App That Makes Life Better"
+
+**How SkillSwap Circle Meets the Criteria:**
+
+✅ **Interactive**
+- Real-time skill exchange (planned video sessions)
+- Community-driven platform
+- Active participation required
+
+✅ **Web App**
+- Accessible from any device
+- No installation needed
+- Progressive web app capabilities
+
+✅ **Makes Life Better**
+- Democratizes education (free for everyone)
+- Builds communities (connects people globally)
+- Measurable social impact
+- Reduces educational inequality
+- Environmental benefits (no travel needed)
+
+### Our Differentiators
+
+```
+┌─────────────────────────────────────────────────┐
+│                                                 │
+│  1. Zero Cost                                   │
+│     Unlike Udemy, Coursera, Skillshare          │
+│                                                 │
+│  2. Bidirectional Learning                      │
+│     Everyone teaches AND learns                 │
+│                                                 │
+│  3. Community-Driven                            │
+│     Build connections, not just transactions    │
+│                                                 │
+│  4. Gamified Experience                         │
+│     Makes learning fun and engaging             │
+│                                                 │
+│  5. Measurable Impact                           │
+│     Track your contribution to society          │
+│                                                 │
+└─────────────────────────────────────────────────┘
+```
+
+---
+
+## 🎨 Design Philosophy
+
+### User-Centric Design
+- Simple, intuitive interface
+- Minimal clicks to value
+- Mobile-first approach
+- Accessibility built-in
+
+### Visual Identity
+- Clean, modern aesthetic
+- Friendly, approachable tone
+- Consistent color scheme
+- Clear information hierarchy
+
+---
+
+## 📊 Potential Impact
+
+### Vision for Scale
+
+```
+Year 1:  100,000 users
+         ████████████████████
+
+Year 2:  1,000,000 users
+         ████████████████████████████████████████
+
+Year 3:  10,000,000 users
+         ████████████████████████████████████████████████████████
+```
+
+### Social Impact Goals
+
+- **Education Access**: Make learning free for everyone
+- **Community Building**: Connect people across borders
+- **Economic Mobility**: Enable career growth through skills
+- **Environmental**: Reduce carbon footprint of education
+- **Social Good**: Create positive feedback loops
 
 ---
 
 ## 🤝 Contributing
 
-We welcome contributions! Here's how you can help:
+We welcome contributions from the community!
 
-### Ways to Contribute
-- 🐛 Report bugs
-- 💡 Suggest features
-- 📝 Improve documentation
-- 🎨 Design improvements
-- 💻 Code contributions
+### How to Contribute
 
-### Development Process
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/amazing-feature`)
 3. Commit your changes (`git commit -m 'Add amazing feature'`)
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-### Code Style
-- Use ESLint configuration
-- Follow React best practices
+### Development Guidelines
+
+- Follow the existing code style
 - Write meaningful commit messages
 - Add tests for new features
+- Update documentation as needed
+
+---
+
+## 👥 Team
+
+Built with ❤️ for the IBM Hackathon 2026
+
+**Special Thanks**:
+- IBM for hosting this amazing hackathon
+- Our mentors and advisors
+- The open-source community
+- Early testers and supporters
 
 ---
 
@@ -381,47 +497,7 @@ We welcome contributions! Here's how you can help:
 
 - [User Story](https://www.notion.so/User-story-352dc30f9ae4803894edf13606433d66) - Product vision and user journeys
 - [Tech Plan](https://www.notion.so/Tech-plan-352dc30f9ae480c1bc45cb783ddf9590) - Technical architecture and decisions
-- [API Documentation](docs/API.md) - Backend API reference
-- [Component Library](docs/COMPONENTS.md) - Frontend component guide
-
----
-
-## 🏆 Hackathon Submission
-
-### Challenge: "Build an Interactive Web App That Makes Life Better"
-
-**How SkillSwap Meets the Criteria:**
-
-✅ **Interactive**: Real-time video skill exchange, not passive consumption
-
-✅ **Web App**: Accessible from any device, no installation needed
-
-✅ **Makes Life Better**:
-- Democratizes education (free for everyone)
-- Builds communities (connects people globally)
-- Measurable impact (tracks hours, money saved, CO2 prevented)
-- Gamification makes learning fun
-- Viral growth through skill chains
-
-### Key Differentiators
-1. **Zero Cost**: Unlike Udemy, Coursera, or Skillshare
-2. **Bidirectional**: Everyone teaches AND learns
-3. **Gamified**: Makes learning addictive
-4. **Community-Driven**: Builds connections, not just transactions
-5. **Measurable Impact**: Track your contribution to society
-
----
-
-## 👥 Team
-
-Built with ❤️ by the SkillSwap team for the 2024 Hackathon
-
-- **Product**: Vision and user experience
-- **Engineering**: Full-stack development
-- **Design**: UI/UX and branding
-- **Growth**: Community and partnerships
-
-Special thanks to **Bob** for accelerating our development 10x! 🤖
+- [GitHub Repository](https://github.com/Haizhouzhou/skill-swap-circle) - Source code
 
 ---
 
@@ -429,8 +505,7 @@ Special thanks to **Bob** for accelerating our development 10x! 🤖
 
 - 🌐 Website: [skill-swap-circle.vercel.app](https://skill-swap-circle.vercel.app/)
 - 📧 Email: team@skillswap.circle
-- 💬 Discord: [Join our community](https://discord.gg/skillswap)
-- 🐦 Twitter: [@SkillSwapCircle](https://twitter.com/skillswapcircle)
+- 📂 GitHub: [@Haizhouzhou](https://github.com/Haizhouzhou/skill-swap-circle)
 
 ---
 
@@ -440,34 +515,32 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-## 🌟 Star Us!
+## 🌟 Our Mission
 
-If you like SkillSwap Circle, give us a ⭐ on GitHub!
+> **To democratize education and create a global knowledge commons where everyone can teach and everyone can learn.**
 
----
-
-## 💬 Testimonials
-
-> "I learned Spanish from someone in Mexico while teaching them guitar. This is brilliant!" - Sarah M.
-
-> "I've wanted to learn coding for years but couldn't afford bootcamps. SkillSwap connected me with a developer who wanted design lessons. Now I'm building my own apps!" - Mike T.
-
-> "The karma points are addictive. I keep teaching just to climb the leaderboard. Best learning platform ever!" - Lisa K.
+Education should be a human right, not a luxury. SkillSwap Circle is our contribution to making that vision a reality.
 
 ---
 
-## 🎯 Our Mission
+## 💬 Testimonials (Vision)
 
-**To democratize education and create a global knowledge commons where everyone can teach and everyone can learn.**
+> "Imagine learning Spanish from someone in Mexico while teaching them guitar. That's the future we're building." - The Team
 
-Education should be a human right, not a luxury. SkillSwap Circle makes it happen.
+> "Every person has knowledge worth sharing. SkillSwap Circle makes it possible." - Our Vision
+
+> "Free education, real connections, measurable impact. That's what the world needs." - Our Mission
 
 ---
 
 <div align="center">
 
+**🏆 IBM Hackathon 2026 Submission**
+
 **Made with 💚 for a better world**
 
-[Try SkillSwap Circle Now →](https://skill-swap-circle.vercel.app/)
+[Try SkillSwap Circle →](https://skill-swap-circle.vercel.app/)
+
+⭐ Star us on GitHub if you believe in our mission!
 
 </div>
