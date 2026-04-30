@@ -1,0 +1,9 @@
+node_modules
+dist
+.env
+.git
+npm-debug.log
+coverage
+local-credentials*.json
+*.local.json
+*.key.json

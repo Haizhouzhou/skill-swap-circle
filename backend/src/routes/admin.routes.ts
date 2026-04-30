@@ -1,0 +1,10 @@
+import { Router } from "express";
+import { requireAdminKey } from "../middleware/adminKey";
+import { asyncHandler } from "../middleware/errorHandler";
+import { validateBody } from "../middleware/validate";
+import { exportDemoData, resetDemoData, seedDemoData } from "../services/seed.service";
+import { adminSeedSchema } from "../validation/schemas";
+export const adminRouter = Router();
+adminRouter.post("/admin/seed", requireAdminKey, validateBody(adminSeedSchema), asyncHandler(async (req, res) => { res.json({ data: await seedDemoData({ resetBeforeSeed: req.body.resetBeforeSeed }) }); }));
+adminRouter.post("/admin/reset", requireAdminKey, asyncHandler(async (_req, res) => { res.json({ data: await resetDemoData() }); }));
+adminRouter.get("/admin/export", requireAdminKey, asyncHandler(async (_req, res) => { res.json({ data: await exportDemoData() }); }));

@@ -1,0 +1,10 @@
+import { Router } from "express";
+import { asyncHandler } from "../middleware/errorHandler";
+import { validateBody } from "../middleware/validate";
+import { deleteSavedListing, listSavedListings, recordListingView, saveListing } from "../services/savedListings.service";
+import { listingViewSchema, savedListingSchema } from "../validation/schemas";
+export const savedListingsRouter = Router();
+savedListingsRouter.post("/users/:userId/saved-listings", validateBody(savedListingSchema), asyncHandler(async (req, res) => { res.status(201).json({ data: await saveListing(req.params.userId, req.body.listingId) }); }));
+savedListingsRouter.delete("/users/:userId/saved-listings/:listingId", asyncHandler(async (req, res) => { res.json({ data: await deleteSavedListing(req.params.userId, req.params.listingId) }); }));
+savedListingsRouter.get("/users/:userId/saved-listings", asyncHandler(async (req, res) => { res.json({ data: await listSavedListings(req.params.userId) }); }));
+savedListingsRouter.post("/users/:userId/history/listing-view", validateBody(listingViewSchema), asyncHandler(async (req, res) => { res.status(201).json({ data: await recordListingView(req.params.userId, req.body.listingId) }); }));

@@ -1,0 +1,14 @@
+import { Router } from "express";
+import { asyncHandler } from "../middleware/errorHandler";
+import { validateBody } from "../middleware/validate";
+import { acceptSession, completeSession, getSession, listUserSessions, requestSession, transitionSession } from "../services/sessions.service";
+import type { SessionStatus } from "../types/domain";
+import { completeSessionSchema, requestSessionSchema } from "../validation/schemas";
+export const sessionsRouter = Router();
+sessionsRouter.post("/sessions/request", validateBody(requestSessionSchema), asyncHandler(async (req, res) => { res.status(201).json({ data: await requestSession(req.body) }); }));
+sessionsRouter.get("/sessions/:sessionId", asyncHandler(async (req, res) => { res.json({ data: await getSession(req.params.sessionId) }); }));
+sessionsRouter.get("/users/:userId/sessions", asyncHandler(async (req, res) => { res.json({ data: await listUserSessions({ userId: req.params.userId, status: req.query.status ? (String(req.query.status) as SessionStatus) : undefined, role: req.query.role ? (String(req.query.role) as "requester" | "receiver" | "any") : "any", limit: req.query.limit ? Number(req.query.limit) : undefined }) }); }));
+sessionsRouter.patch("/sessions/:sessionId/accept", asyncHandler(async (req, res) => { res.json({ data: await acceptSession(req.params.sessionId) }); }));
+sessionsRouter.patch("/sessions/:sessionId/decline", asyncHandler(async (req, res) => { res.json({ data: await transitionSession(req.params.sessionId, "declined") }); }));
+sessionsRouter.patch("/sessions/:sessionId/cancel", asyncHandler(async (req, res) => { res.json({ data: await transitionSession(req.params.sessionId, "cancelled") }); }));
+sessionsRouter.post("/sessions/:sessionId/complete", validateBody(completeSessionSchema), asyncHandler(async (req, res) => { res.json({ data: await completeSession(req.params.sessionId, req.body) }); }));

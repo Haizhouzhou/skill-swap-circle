@@ -1,0 +1,10 @@
+import { Router } from "express";
+import { asyncHandler } from "../middleware/errorHandler";
+import { validateBody } from "../middleware/validate";
+import { discoverSkills, draftMessage, explainMatch, recommendLearning } from "../services/aiStub.service";
+import { aiTextSchema } from "../validation/schemas";
+export const aiRouter = Router();
+aiRouter.post("/ai/discover-skills", validateBody(aiTextSchema), asyncHandler(async (req, res) => { res.json({ data: discoverSkills(req.body.text) }); }));
+aiRouter.post("/ai/recommend-learning", validateBody(aiTextSchema), asyncHandler(async (req, res) => { res.json({ data: recommendLearning(req.body.intent) }); }));
+aiRouter.post("/ai/explain-match", validateBody(aiTextSchema), asyncHandler(async (req, res) => { res.json({ data: await explainMatch(req.body.userId, req.body.listingId) }); }));
+aiRouter.post("/ai/draft-message", validateBody(aiTextSchema), asyncHandler(async (req, res) => { res.json({ data: await draftMessage(req.body.userId, req.body.listingId, req.body.text) }); }));

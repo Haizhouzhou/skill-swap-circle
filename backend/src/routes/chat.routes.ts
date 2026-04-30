@@ -1,0 +1,11 @@
+import { Router } from "express";
+import { asyncHandler } from "../middleware/errorHandler";
+import { validateBody } from "../middleware/validate";
+import { addMessage, createChatThread, getThread, listUserChatThreads, markThreadRead } from "../services/chat.service";
+import { createMessageSchema, createThreadSchema } from "../validation/schemas";
+export const chatRouter = Router();
+chatRouter.get("/users/:userId/chat-threads", asyncHandler(async (req, res) => { res.json({ data: await listUserChatThreads(req.params.userId) }); }));
+chatRouter.get("/chat/threads/:threadId", asyncHandler(async (req, res) => { res.json({ data: await getThread(req.params.threadId) }); }));
+chatRouter.post("/chat/threads", validateBody(createThreadSchema), asyncHandler(async (req, res) => { res.status(201).json({ data: await createChatThread(req.body) }); }));
+chatRouter.post("/chat/threads/:threadId/messages", validateBody(createMessageSchema), asyncHandler(async (req, res) => { res.status(201).json({ data: await addMessage(req.params.threadId, req.body) }); }));
+chatRouter.patch("/chat/threads/:threadId/read", asyncHandler(async (req, res) => { res.json({ data: await markThreadRead(req.params.threadId, req.demoContext.actorUserId) }); }));
