@@ -3,7 +3,20 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import Index from "./pages/Index.tsx";
+import { DemoUserProvider } from "@/context/DemoUserContext";
+import { AppShell } from "@/components/AppShell";
+
+import Landing from "./pages/Landing";
+import BrowseLearn from "./pages/BrowseLearn";
+import BrowseTeach from "./pages/BrowseTeach";
+import ListingPage from "./pages/ListingPage";
+import PublicProfile from "./pages/PublicProfile";
+import Dashboard from "./pages/Dashboard";
+import CreateOffer from "./pages/CreateOffer";
+import CreateRequest from "./pages/CreateRequest";
+import MedalSettings from "./pages/MedalSettings";
+import ChatPage from "./pages/ChatPage";
+import Impact from "./pages/Impact";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
@@ -14,11 +27,24 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <DemoUserProvider>
+          <AppShell>
+            <Routes>
+              <Route path="/" element={<Landing />} />
+              <Route path="/browse/learn" element={<BrowseLearn />} />
+              <Route path="/browse/teach" element={<BrowseTeach />} />
+              <Route path="/listing/:id" element={<ListingPage />} />
+              <Route path="/profile/:userId" element={<PublicProfile />} />
+              <Route path="/me" element={<Dashboard />} />
+              <Route path="/me/create-offer" element={<CreateOffer />} />
+              <Route path="/me/create-request" element={<CreateRequest />} />
+              <Route path="/me/medals" element={<MedalSettings />} />
+              <Route path="/chat/:threadId" element={<ChatPage />} />
+              <Route path="/impact" element={<Impact />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </AppShell>
+        </DemoUserProvider>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
