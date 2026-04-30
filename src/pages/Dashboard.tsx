@@ -48,7 +48,8 @@ export default function Dashboard() {
           <p className="text-xs uppercase tracking-wide text-mutedInk">Stepping in as</p>
           <h1 className="font-serif text-3xl text-ink">{user.name} · {user.city}</h1>
           <p className="text-mutedInk mt-1 max-w-prose">{user.bio}</p>
-          <div className="flex flex-wrap gap-2 mt-3">
+          <div className="flex flex-wrap gap-2 mt-3 items-center">
+            <span className="chip">Points · {user.points}</span>
             {user.visibleMedalIds.slice(0, 3).map((id) => <MedalBadge key={id} id={id} size="sm" />)}
           </div>
         </div>

@@ -9,6 +9,7 @@ export function UserProfileCard({ user, compact }: { user: User; compact?: boole
       <div className="flex-1 min-w-0">
         <Link to={`/profile/${user.id}`} className="font-serif text-lg text-ink hover:text-moss transition-colors">{user.name}</Link>
         <p className="text-sm text-mutedInk">{user.city}, {user.canton} · {user.languages.join(", ")}</p>
+        <p className="text-xs text-moss mt-1">Points: {user.points}</p>
         {!compact && <p className="text-sm text-mutedInk mt-2 leading-relaxed">{user.bio}</p>}
         {user.visibleMedalIds.length > 0 && (
           <div className="flex flex-wrap gap-1.5 mt-3">

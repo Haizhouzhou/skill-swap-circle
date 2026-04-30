@@ -50,6 +50,7 @@ export default function PublicProfile() {
             </div>
           ) : null}
           <div className="flex flex-wrap items-center gap-2 mt-5">
+            <span className="chip">Points · {user.points}</span>
             <span className="chip">Impact score · {user.impactScore}</span>
             {feedbackTags.slice(0, 4).map((t) => <span key={t} className="chip">{t}</span>)}
           </div>

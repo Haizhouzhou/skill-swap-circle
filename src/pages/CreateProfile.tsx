@@ -63,6 +63,7 @@ export default function CreateProfile() {
       learnSkills,
       visibleMedalIds: [],
       allMedalIds: [],
+      points: 20,
       impactScore: 0,
       avatarSeed: "custom",
     };

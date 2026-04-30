@@ -53,6 +53,7 @@ export type User = {
   learnSkills?: string[];
   visibleMedalIds: string[];
   allMedalIds: string[];
+  points: number;
   impactScore: number;
   avatarSeed: string;
 };
