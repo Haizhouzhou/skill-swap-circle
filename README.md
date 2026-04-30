@@ -8,7 +8,7 @@
 
 **🏆 IBM Hackathon 2026 Submission**
 
-[🌐 Live Demo](https://https://skill-swap-circle-bob.vercel.app//) | [📖 User Story](https://www.notion.so/User-story-352dc30f9ae4803894edf13606433d66) | [🛠️ Tech Plan](https://www.notion.so/Tech-plan-352dc30f9ae480c1bc45cb783ddf9590) | [📂 GitHub](https://github.com/Haizhouzhou/skill-swap-circle)
+[🌐 Live Demo](https://skill-swap-circle-bob.vercel.app//) | [📖 User Story](https://www.notion.so/User-story-352dc30f9ae4803894edf13606433d66) | [🛠️ Tech Plan](https://www.notion.so/Tech-plan-352dc30f9ae480c1bc45cb783ddf9590) | [📂 GitHub](https://github.com/Haizhouzhou/skill-swap-circle)
 
 ---
 
@@ -503,7 +503,7 @@ Built with ❤️ for the IBM Hackathon 2026
 
 ## 📞 Contact
 
-- 🌐 Website: [https://skill-swap-circle-bob.vercel.app/](https://https://skill-swap-circle-bob.vercel.app//)
+- 🌐 Website: [https://skill-swap-circle-bob.vercel.app/](https://skill-swap-circle-bob.vercel.app//)
 - 📧 Email: team@skillswap.circle
 - 📂 GitHub: [@Haizhouzhou](https://github.com/Haizhouzhou/skill-swap-circle)
 
@@ -539,7 +539,7 @@ Education should be a human right, not a luxury. SkillSwap Circle is our contrib
 
 **Made with 💚 for a better world**
 
-[Try SkillSwap Circle →](https://https://skill-swap-circle-bob.vercel.app//)
+[Try SkillSwap Circle →](https://skill-swap-circle-bob.vercel.app//)
 
 ⭐ Star us on GitHub if you believe in our mission!
 
