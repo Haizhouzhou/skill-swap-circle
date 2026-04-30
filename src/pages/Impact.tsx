@@ -1,6 +1,6 @@
 import { ImpactCounter } from "@/components/ImpactCounter";
 import { SkillChainView } from "@/components/SkillChainView";
-import { AreaConnectionGraph } from "@/components/AreaConnectionGraph";
+import { GeoAdminSkillMap } from "@/components/GeoAdminSkillMap";
 import { SEED_CHAINS } from "@/mock/chains";
 
 export default function Impact() {
@@ -21,12 +21,12 @@ export default function Impact() {
         <ImpactCounter value={40} label="Active skill chains" />
       </section>
 
-      <section className="grid lg:grid-cols-5 gap-6 items-start">
-        <div className="lg:col-span-2">
+      <section className="grid xl:grid-cols-5 gap-6 items-start">
+        <div className="xl:col-span-2">
           <SkillChainView chain={featured} />
         </div>
-        <div className="lg:col-span-3">
-          <AreaConnectionGraph />
+        <div className="xl:col-span-3">
+          <GeoAdminSkillMap />
         </div>
       </section>
 

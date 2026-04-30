@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>Skillswap connection activity</name>
+    <description>Demo skill-swap activity lines for the Skillswap impact map.</description>
+    <Style id="skillswapConnection">
+      <LineStyle>
+        <color>cc4f8b6b</color>
+        <width>5</width>
+      </LineStyle>
+    </Style>
+    <Style id="skillswapCity">
+      <IconStyle>
+        <scale>0.85</scale>
+        <Icon>
+          <href>https://maps.google.com/mapfiles/kml/paddle/grn-circle.png</href>
+        </Icon>
+      </IconStyle>
+    </Style>
+
+    <Folder>
+      <name>Connection lines</name>
+      <Placemark>
+        <name>Zurich to Bern</name>
+        <description><![CDATA[18 swaps shared<br/>Top: Swiss life, Language practice<br/>Latest: Prepare for a flat viewing]]></description>
+        <styleUrl>#skillswapConnection</styleUrl>
+        <LineString>
+          <tessellate>1</tessellate>
+          <coordinates>8.5417,47.3769,0 7.4474,46.9481,0</coordinates>
+        </LineString>
+      </Placemark>
+      <Placemark>
+        <name>Basel to Zurich</name>
+        <description><![CDATA[14 swaps shared<br/>Top: Language practice, Digital life<br/>Latest: Practice German small talk]]></description>
+        <styleUrl>#skillswapConnection</styleUrl>
+        <LineString>
+          <tessellate>1</tessellate>
+          <coordinates>7.5886,47.5596,0 8.5417,47.3769,0</coordinates>
+        </LineString>
+      </Placemark>
+      <Placemark>
+        <name>Lausanne to Geneva</name>
+        <description><![CDATA[13 swaps shared<br/>Top: Career basics, Home &amp; cooking<br/>Latest: Write a simple CV]]></description>
+        <styleUrl>#skillswapConnection</styleUrl>
+        <LineString>
+          <tessellate>1</tessellate>
+          <coordinates>6.6323,46.5197,0 6.1432,46.2044,0</coordinates>
+        </LineString>
+      </Placemark>
+      <Placemark>
+        <name>Bern to Lausanne</name>
+        <description><![CDATA[9 swaps shared<br/>Top: Study habits, Money &amp; budgeting<br/>Latest: Create a simple monthly budget]]></description>
+        <styleUrl>#skillswapConnection</styleUrl>
+        <LineString>
+          <tessellate>1</tessellate>
+          <coordinates>7.4474,46.9481,0 6.6323,46.5197,0</coordinates>
+        </LineString>
+      </Placemark>
+      <Placemark>
+        <name>Zurich to St. Gallen</name>
+        <description><![CDATA[8 swaps shared<br/>Top: Repair &amp; DIY, Swiss life<br/>Latest: Fix a bike tire]]></description>
+        <styleUrl>#skillswapConnection</styleUrl>
+        <LineString>
+          <tessellate>1</tessellate>
+          <coordinates>8.5417,47.3769,0 9.3767,47.4245,0</coordinates>
+        </LineString>
+      </Placemark>
+      <Placemark>
+        <name>Lucerne to Zurich</name>
+        <description><![CDATA[11 swaps shared<br/>Top: Home &amp; cooking, Swiss life<br/>Latest: Use SBB / SwissPass efficiently]]></description>
+        <styleUrl>#skillswapConnection</styleUrl>
+        <LineString>
+          <tessellate>1</tessellate>
+          <coordinates>8.3093,47.0502,0 8.5417,47.3769,0</coordinates>
+        </LineString>
+      </Placemark>
+      <Placemark>
+        <name>Lugano to Lucerne</name>
+        <description><![CDATA[6 swaps shared<br/>Top: Language practice, Wellbeing<br/>Latest: Practice Italian basics]]></description>
+        <styleUrl>#skillswapConnection</styleUrl>
+        <LineString>
+          <tessellate>1</tessellate>
+          <coordinates>8.9511,46.0037,0 8.3093,47.0502,0</coordinates>
+        </LineString>
+      </Placemark>
+      <Placemark>
+        <name>Fribourg to Bern</name>
+        <description><![CDATA[7 swaps shared<br/>Top: Study habits, Social confidence<br/>Latest: Prepare a group presentation]]></description>
+        <styleUrl>#skillswapConnection</styleUrl>
+        <LineString>
+          <tessellate>1</tessellate>
+          <coordinates>7.161971,46.806477,0 7.4474,46.9481,0</coordinates>
+        </LineString>
+      </Placemark>
+      <Placemark>
+        <name>Winterthur to Zurich</name>
+        <description><![CDATA[16 swaps shared<br/>Top: Digital life, Swiss life<br/>Latest: Avoid online scams]]></description>
+        <styleUrl>#skillswapConnection</styleUrl>
+        <LineString>
+          <tessellate>1</tessellate>
+          <coordinates>8.7321,47.4988,0 8.5417,47.3769,0</coordinates>
+        </LineString>
+      </Placemark>
+      <Placemark>
+        <name>Geneva to Bern</name>
+        <description><![CDATA[5 swaps shared<br/>Top: Career basics, Social confidence<br/>Latest: Prepare for a networking event]]></description>
+        <styleUrl>#skillswapConnection</styleUrl>
+        <LineString>
+          <tessellate>1</tessellate>
+          <coordinates>6.1432,46.2044,0 7.4474,46.9481,0</coordinates>
+        </LineString>
+      </Placemark>
+    </Folder>
+
+    <Folder>
+      <name>City points</name>
+      <Placemark><name>Geneva</name><styleUrl>#skillswapCity</styleUrl><Point><coordinates>6.1432,46.2044,0</coordinates></Point></Placemark>
+      <Placemark><name>Lausanne</name><styleUrl>#skillswapCity</styleUrl><Point><coordinates>6.6323,46.5197,0</coordinates></Point></Placemark>
+      <Placemark><name>Fribourg</name><styleUrl>#skillswapCity</styleUrl><Point><coordinates>7.161971,46.806477,0</coordinates></Point></Placemark>
+      <Placemark><name>Bern</name><styleUrl>#skillswapCity</styleUrl><Point><coordinates>7.4474,46.9481,0</coordinates></Point></Placemark>
+      <Placemark><name>Basel</name><styleUrl>#skillswapCity</styleUrl><Point><coordinates>7.5886,47.5596,0</coordinates></Point></Placemark>
+      <Placemark><name>Lucerne</name><styleUrl>#skillswapCity</styleUrl><Point><coordinates>8.3093,47.0502,0</coordinates></Point></Placemark>
+      <Placemark><name>Zurich</name><styleUrl>#skillswapCity</styleUrl><Point><coordinates>8.5417,47.3769,0</coordinates></Point></Placemark>
+      <Placemark><name>Winterthur</name><styleUrl>#skillswapCity</styleUrl><Point><coordinates>8.7321,47.4988,0</coordinates></Point></Placemark>
+      <Placemark><name>St. Gallen</name><styleUrl>#skillswapCity</styleUrl><Point><coordinates>9.3767,47.4245,0</coordinates></Point></Placemark>
+      <Placemark><name>Lugano</name><styleUrl>#skillswapCity</styleUrl><Point><coordinates>8.9511,46.0037,0</coordinates></Point></Placemark>
+    </Folder>
+  </Document>
+</kml>
