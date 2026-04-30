@@ -30,6 +30,33 @@ Based on the concept of SkillSwap Circle (a skill-sharing platform), here are st
   - Bonus points for completing skill chains (+20)
   - Display karma score prominently on profile
 
+**Suggested Points Economy**:
+- Every new user starts with **20 starter points**
+- Completing a teaching session gives the teacher **+15 points**
+- Completing a learning session costs the learner **10 points**
+- Points should be **reserved when a learning request is accepted** and transferred only after the session is marked complete
+- If a session is cancelled early, the reserved points should be refunded
+- If a user cancels late or does not show up, apply a small penalty such as **-3 points**
+- Give a first-time teaching bonus such as **+5 points** to encourage early engagement
+- Optionally add a **+2 bonus** when a teacher receives strong positive feedback
+- Earn **+1 point** for every login once per day. 
+
+**Why this is a good fit**:
+- It creates a clear loop: **teach to earn, spend to learn**
+- It keeps the platform non-monetary while still rewarding contribution
+- It reduces spam learning requests because asking for help has a real cost
+- Starter points solve the cold-start problem and let new users request help immediately
+
+**Important guardrails**:
+- Do **not** give points simply for posting an offer or a request
+- Transfer points only after **both sides confirm** the session happened
+- Consider limiting repeated rewards between the same two users to reduce abuse
+- Show the points clearly in the UI, for example:
+  - `You will spend 10 points`
+  - `You will earn 10 points after completion`
+  - `+10 Taught English conversation`
+  - `-10 Learned interview prep`
+
 - **Achievement Badges**
   - "First Teacher" - Complete first teaching session
   - "Knowledge Seeker" - Learn 5 different skills
@@ -362,3 +389,5 @@ You'll create a compelling case for why SkillSwap makes life better and deserves
 **Remember**: The best hackathon projects tell a story, solve a real problem, and inspire judges to imagine the future you're building.
 
 Good luck! 🍀
+
+## Karma point system 
