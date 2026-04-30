@@ -1,23 +1,16 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useDemoUser } from "@/context/DemoUserContext";
-import { SEED_LISTINGS } from "@/mock/listings";
-import { SEED_SESSIONS } from "@/mock/sessions";
-import { SEED_CHATS } from "@/mock/chats";
-import { useLocalStorage } from "@/hooks/useLocalStorage";
-import { STORAGE } from "@/lib/storageKeys";
-import type { ChatThread, Listing } from "@/mock/types";
+import { useUserDashboardQuery } from "@/lib/api-hooks";
+import { getUserById } from "@/lib/appData";
 import { Button } from "@/components/ui/button";
 import { ListingCard } from "@/components/ListingCard";
 import { MedalBadge } from "@/components/MedalBadge";
-import { USERS_BY_ID } from "@/mock/users";
 import { useEffect } from "react";
 
 export default function Dashboard() {
   const { user, promptDemoUser } = useDemoUser();
   const navigate = useNavigate();
-  const [created] = useLocalStorage<Listing[]>(STORAGE.createdListings, []);
-  const [saved] = useLocalStorage<string[]>(STORAGE.savedListings, []);
-  const [storedChats] = useLocalStorage<ChatThread[]>(STORAGE.chatThreads, []);
+  const { data } = useUserDashboardQuery(user?.id);
 
   useEffect(() => { if (!user) promptDemoUser("Step in as a demo person to see your space."); }, []); // eslint-disable-line
 
@@ -31,14 +24,11 @@ export default function Dashboard() {
     );
   }
 
-  const allListings = [...created, ...SEED_LISTINGS];
-  const myOffers = allListings.filter((l) => l.ownerUserId === user.id && l.type === "offer");
-  const myRequests = allListings.filter((l) => l.ownerUserId === user.id && l.type === "request");
-  const savedListings = allListings.filter((l) => saved.includes(l.id));
-  const recentSessions = SEED_SESSIONS.filter((s) => s.offerUserId === user.id || s.learnerUserId === user.id).slice(0, 4);
-  const myThreads = [...storedChats, ...SEED_CHATS]
-    .filter((t) => t.participantIds.includes(user.id))
-    .slice(0, 4);
+  const myOffers = data?.teachingOffers ?? [];
+  const myRequests = data?.learningRequests ?? [];
+  const savedListings = data?.savedListings ?? [];
+  const recentSessions = data?.recentSessions ?? [];
+  const myThreads = data?.recentChatThreads ?? [];
 
   return (
     <div className="container py-10 page-fade space-y-10">
@@ -79,7 +69,7 @@ export default function Dashboard() {
           <ul className="space-y-2">
             {myThreads.map((t) => {
               const other = t.participantIds.find((id) => id !== user.id);
-              const otherName = other ? USERS_BY_ID[other]?.name ?? "someone" : "someone";
+              const otherName = other ? getUserById(other)?.name ?? "someone" : "someone";
               const last = t.messages[t.messages.length - 1];
               return (
                 <li key={t.id}>

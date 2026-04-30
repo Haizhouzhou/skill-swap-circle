@@ -4,16 +4,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { CATEGORIES, CITIES, LANGUAGES } from "@/mock/constants";
 import type { SkillCategory, User } from "@/mock/types";
-import { STORAGE } from "@/lib/storageKeys";
-import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { useDemoUser } from "@/context/DemoUserContext";
-
-const CUSTOM_USER_ID = "user_custom_local";
+import { useCreateUserMutation } from "@/lib/api-hooks";
 
 export default function CreateProfile() {
   const navigate = useNavigate();
   const { customUser, setCustomUser, setUserId } = useDemoUser();
-  const [, setSelectedUserId] = useLocalStorage<string | null>(STORAGE.selectedUserId, null);
+  const createUser = useCreateUserMutation();
 
   const [name, setName] = useState(customUser?.name ?? "");
   const [email, setEmail] = useState(customUser?.email ?? "");
@@ -48,8 +45,7 @@ export default function CreateProfile() {
     const learnSkills = splitList(learnSkillsRaw);
     const interests = Array.from(new Set([...teachCategories, ...learnCategories]));
 
-    const profile: User = {
-      id: CUSTOM_USER_ID,
+    void createUser.mutateAsync({
       name: name.trim(),
       email: email.trim(),
       city,
@@ -61,17 +57,12 @@ export default function CreateProfile() {
       learnCategories,
       teachSkills,
       learnSkills,
-      visibleMedalIds: [],
-      allMedalIds: [],
-      points: 20,
-      impactScore: 0,
-      avatarSeed: "custom",
-    };
-
-    setCustomUser(profile);
-    setSelectedUserId(profile.id);
-    setUserId(profile.id);
-    navigate("/me");
+    }).then(({ data }) => {
+      const profile = data.user as User;
+      setCustomUser(profile);
+      setUserId(profile.id);
+      navigate("/me");
+    });
   }
 
   return (
@@ -172,7 +163,7 @@ export default function CreateProfile() {
 
         <div className="flex justify-end">
           <Button type="submit" className="bg-moss text-cream hover:bg-ink rounded-full">
-            Save profile
+            {createUser.isPending ? "Saving..." : "Save profile"}
           </Button>
         </div>
       </form>

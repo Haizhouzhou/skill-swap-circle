@@ -1,14 +1,14 @@
 import type { Listing } from "@/mock/types";
-import { USERS_BY_ID } from "@/mock/users";
 import { Link } from "react-router-dom";
 import { MapPin, Clock, Languages, Globe, Users as UsersIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useRequireDemoUser } from "@/hooks/useRequireDemoUser";
 import { useNavigate } from "react-router-dom";
 import { MEDAL_BY_ID } from "@/mock/medals";
+import { getUserById } from "@/lib/appData";
 
 export function ListingCard({ listing }: { listing: Listing }) {
-  const owner = USERS_BY_ID[listing.ownerUserId];
+  const owner = getUserById(listing.ownerUserId);
   const navigate = useNavigate();
   const { requireUser } = useRequireDemoUser();
   const isOffer = listing.type === "offer";
@@ -52,11 +52,11 @@ export function ListingCard({ listing }: { listing: Listing }) {
       )}
 
       <footer className="flex items-center justify-between mt-1 pt-3 border-t border-borderSoft">
-        <Link to={`/profile/${owner.id}`} className="flex items-center gap-2 group">
-          <span className="w-8 h-8 rounded-full bg-sand grid place-items-center font-serif text-moss text-sm">{owner.name[0]}</span>
+        <Link to={`/profile/${owner?.id ?? listing.ownerUserId}`} className="flex items-center gap-2 group">
+          <span className="w-8 h-8 rounded-full bg-sand grid place-items-center font-serif text-moss text-sm">{owner?.name?.[0] ?? "?"}</span>
           <span className="text-sm">
-            <span className="text-ink group-hover:text-moss transition-colors">{owner.name}</span>
-            {isOffer && owner.visibleMedalIds.length > 0 && (
+            <span className="text-ink group-hover:text-moss transition-colors">{owner?.name ?? "Unknown user"}</span>
+            {isOffer && owner && owner.visibleMedalIds.length > 0 && (
               <span className="text-mutedInk ml-1">· {MEDAL_BY_ID[owner.visibleMedalIds[0]]?.title}</span>
             )}
           </span>

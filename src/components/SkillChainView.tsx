@@ -1,4 +1,4 @@
-import { USERS_BY_ID } from "@/mock/users";
+import { getUserById } from "@/lib/appData";
 import type { SkillChain } from "@/mock/types";
 import { ArrowDown } from "lucide-react";
 
@@ -8,8 +8,8 @@ export function SkillChainView({ chain }: { chain: SkillChain }) {
       <h3 className="font-serif text-xl text-ink mb-4">A small chain of kindness</h3>
       <ol className="flex flex-col items-stretch gap-3">
         {chain.steps.map((s, i) => {
-          const from = USERS_BY_ID[s.fromUserId];
-          const to = USERS_BY_ID[s.toUserId];
+          const from = getUserById(s.fromUserId);
+          const to = getUserById(s.toUserId);
           return (
             <li key={i}>
               <div className="rounded-2xl bg-accent/50 p-4 flex items-center gap-3">

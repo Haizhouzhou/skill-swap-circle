@@ -4,16 +4,14 @@ import { SEED_CHATS } from "@/mock/chats";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { STORAGE } from "@/lib/storageKeys";
 import type { ChatThread, Listing } from "@/mock/types";
-import { SEED_LISTINGS } from "@/mock/listings";
 import { ChatPanel } from "@/components/ChatPanel";
 import { useDemoUser } from "@/context/DemoUserContext";
-import { USERS_BY_ID } from "@/mock/users";
+import { getAllListings, getUserById } from "@/lib/appData";
 
 export default function ChatPage() {
   const { threadId } = useParams();
   const { user } = useDemoUser();
   const [stored, setStored] = useLocalStorage<ChatThread[]>(STORAGE.chatThreads, []);
-  const [created] = useLocalStorage<Listing[]>(STORAGE.createdListings, []);
 
   const allThreads = useMemo(() => {
     const map = new Map<string, ChatThread>();
@@ -21,7 +19,7 @@ export default function ChatPage() {
     return [...map.values()];
   }, [stored]);
 
-  const allListings = useMemo(() => [...created, ...SEED_LISTINGS], [created]);
+  const allListings = useMemo(() => getAllListings(), []);
 
   let thread = allThreads.find((t) => t.id === threadId);
 
@@ -35,7 +33,7 @@ export default function ChatPage() {
         listingId: listing.id,
         participantIds: [listing.ownerUserId, user.id],
         messages: [
-          { id: "auto1", senderId: user.id, text: `Hi ${USERS_BY_ID[listing.ownerUserId]?.name ?? "there"}, I saw your listing about ${listing.title.toLowerCase()}. Could we set something up?`, createdAt: new Date().toISOString() },
+          { id: "auto1", senderId: user.id, text: `Hi ${getUserById(listing.ownerUserId)?.name ?? "there"}, I saw your listing about ${listing.title.toLowerCase()}. Could we set something up?`, createdAt: new Date().toISOString() },
         ],
       };
       // Persist immediately

@@ -1,5 +1,4 @@
 import type { Listing } from "@/mock/types";
-import { USERS_BY_ID } from "@/mock/users";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { MapPin, Clock, Languages, Globe, Users as UsersIcon, Mail, MessageCircle, Heart } from "lucide-react";
@@ -13,9 +12,10 @@ import { matchScore, similarListings, recommendFor } from "@/lib/match";
 import { useDemoUser } from "@/context/DemoUserContext";
 import { useToast } from "@/hooks/use-toast";
 import { ListingCard } from "./ListingCard";
+import { getUserById } from "@/lib/appData";
 
 export function ListingDetail({ listing, allListings }: { listing: Listing; allListings: Listing[] }) {
-  const owner = USERS_BY_ID[listing.ownerUserId];
+  const owner = getUserById(listing.ownerUserId);
   const isOffer = listing.type === "offer";
   const { user } = useDemoUser();
   const { requireUser } = useRequireDemoUser();

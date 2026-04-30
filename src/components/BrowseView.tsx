@@ -3,56 +3,38 @@ import { SwapToggle } from "@/components/SwapToggle";
 import { SearchBar } from "@/components/SearchBar";
 import { FilterPanel, defaultFilters, type Filters } from "@/components/FilterPanel";
 import { ListingGrid } from "@/components/ListingGrid";
-import type { Listing, ListingType } from "@/mock/types";
-import { SEED_LISTINGS } from "@/mock/listings";
-import { useLocalStorage } from "@/hooks/useLocalStorage";
-import { STORAGE } from "@/lib/storageKeys";
+import type { ListingType } from "@/mock/types";
 import { useDemoUser } from "@/context/DemoUserContext";
-import { recommendFor, matchScore } from "@/lib/match";
 import { ListingCard } from "@/components/ListingCard";
+import { useBrowseListingsQuery, useRecommendationsQuery } from "@/lib/api-hooks";
 
 export function BrowseView({ mode }: { mode: "learn" | "teach" }) {
   // /browse/learn shows OFFERS (people teaching), /browse/teach shows REQUESTS (people learning)
   const wanted: ListingType = mode === "learn" ? "offer" : "request";
 
-  const [created] = useLocalStorage<Listing[]>(STORAGE.createdListings, []);
-  const [saved] = useLocalStorage<string[]>(STORAGE.savedListings, []);
-  const [clicked] = useLocalStorage<string[]>(STORAGE.clickedListings, []);
   const { user } = useDemoUser();
 
   const [q, setQ] = useState("");
   const [filters, setFilters] = useState<Filters>(defaultFilters);
+  const browseQuery = useBrowseListingsQuery({
+    type: wanted,
+    q,
+    category: filters.category === "all" ? undefined : filters.category,
+    city: filters.city === "all" ? undefined : filters.city,
+    mode: filters.mode === "all" ? undefined : filters.mode,
+    language: filters.language === "all" ? undefined : filters.language,
+    duration: filters.duration === "all" ? undefined : Number(filters.duration),
+    beginnerFriendly: filters.beginnerOnly || undefined,
+    recommendedOnly: filters.recommendedOnly || undefined,
+    userId: user?.id,
+    limit: 400,
+  });
+  const recommendationsQuery = useRecommendationsQuery(user?.id, mode, 4);
 
-  const allListings = useMemo<Listing[]>(() => [...created, ...SEED_LISTINGS], [created]);
-
-  const filtered = useMemo(() => {
-    const text = q.trim().toLowerCase();
-    return allListings
-      .filter((l) => l.type === wanted)
-      .filter((l) => {
-        if (filters.category !== "all" && l.category !== filters.category) return false;
-        if (filters.city !== "all" && l.city !== filters.city) return false;
-        if (filters.mode !== "all" && !l.mode.includes(filters.mode)) return false;
-        if (filters.language !== "all" && !l.languages.includes(filters.language)) return false;
-        if (filters.duration !== "all" && String(l.durationMinutes) !== filters.duration) return false;
-        if (filters.beginnerOnly && !l.beginnerFriendly) return false;
-        if (filters.recommendedOnly) {
-          if (!user) return false;
-          const m = matchScore(user, l);
-          if (m.score < 30) return false;
-        }
-        if (text) {
-          const hay = `${l.title} ${l.description} ${l.category} ${l.city} ${l.canton} ${l.tags.join(" ")}`.toLowerCase();
-          if (!hay.includes(text)) return false;
-        }
-        return true;
-      })
-      .sort((a, b) => +new Date(b.createdAt) - +new Date(a.createdAt));
-  }, [allListings, wanted, filters, q, user]);
-
+  const filtered = useMemo(() => browseQuery.data?.items ?? [], [browseQuery.data]);
   const recommended = useMemo(
-    () => recommendFor(user, allListings, { mode, limit: 4, saved, clicked }).filter((r) => r.score > 0),
-    [user, allListings, mode, saved, clicked],
+    () => (recommendationsQuery.data?.items ?? []).filter((entry) => entry.score > 0),
+    [recommendationsQuery.data],
   );
 
   return (

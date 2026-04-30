@@ -1,7 +1,8 @@
-import { createContext, useCallback, useContext, useMemo, useState, type ReactNode } from "react";
-import { USERS_BY_ID, NAMED_USER_IDS } from "@/mock/users";
+import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 import type { User } from "@/mock/types";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
+import { api } from "@/lib/api";
+import { getUserById } from "@/lib/appData";
 import { STORAGE } from "@/lib/storageKeys";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
@@ -33,18 +34,17 @@ export function DemoUserProvider({ children }: { children: ReactNode }) {
 
   const user = useMemo(() => {
     if (!selectedId) return null;
-    if (NAMED_USER_IDS.includes(selectedId)) {
-      return USERS_BY_ID[selectedId] ?? null;
-    }
-    if (customUser?.id === selectedId) {
-      return customUser;
-    }
-    return null;
+    return getUserById(selectedId);
   }, [customUser, selectedId]);
+
+  useEffect(() => {
+    void api.createDemoSession();
+  }, []);
 
   const setUserId = useCallback((id: string | null) => {
     setSelectedId(id);
     setPromptOpen(false);
+    void api.selectDemoUser(id);
   }, [setSelectedId]);
 
   const promptDemoUser = useCallback((r?: string) => {

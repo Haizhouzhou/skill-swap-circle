@@ -13,12 +13,13 @@ import { Input } from "@/components/ui/input";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
+import { useCreateListingMutation } from "@/lib/api-hooks";
 
 export function ListingForm({ type }: { type: "offer" | "request" }) {
   const { user, promptDemoUser } = useDemoUser();
   const navigate = useNavigate();
-  const [created, setCreated] = useLocalStorage<Listing[]>(STORAGE.createdListings, []);
   const { toast } = useToast();
+  const createListing = useCreateListingMutation();
 
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState<SkillCategory>("Swiss life");
@@ -45,8 +46,7 @@ export function ListingForm({ type }: { type: "offer" | "request" }) {
     e.preventDefault();
     if (!title.trim() || !user || !availabilityDate) return;
     const cityObj = CITIES.find((c) => c.city === city) ?? CITIES[0];
-    const newListing: Listing = {
-      id: `${type}_user_${Date.now()}`,
+    void createListing.mutateAsync({
       type,
       title: title.trim(),
       description: description.trim() || (type === "offer" ? "A small, calm session." : "Looking for a kind hand."),
@@ -66,10 +66,10 @@ export function ListingForm({ type }: { type: "offer" | "request" }) {
       beginnerFriendly,
       recommendedFor: type === "offer" ? ["newcomers"] : [],
       createdAt: new Date().toISOString(),
-    };
-    setCreated([newListing, ...created]);
-    toast({ title: type === "offer" ? "Offer shared" : "Request posted", description: "Thank you for taking the time." });
-    navigate(`/listing/${newListing.id}`);
+    } as Listing).then(({ data }) => {
+      toast({ title: type === "offer" ? "Offer shared" : "Request posted", description: "Thank you for taking the time." });
+      navigate(`/listing/${data.listing.id}`);
+    });
   }
 
   const isOffer = type === "offer";
@@ -162,7 +162,7 @@ export function ListingForm({ type }: { type: "offer" | "request" }) {
         )}
         <div className="flex justify-end">
           <Button type="submit" className="bg-moss text-cream hover:bg-ink rounded-full">
-            {isOffer ? "Share my offer" : "Post my request"}
+            {createListing.isPending ? "Saving..." : isOffer ? "Share my offer" : "Post my request"}
           </Button>
         </div>
       </form>

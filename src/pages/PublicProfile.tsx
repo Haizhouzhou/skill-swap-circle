@@ -1,9 +1,5 @@
-import { useDemoUser } from "@/context/DemoUserContext";
+import { useUserProfileQuery } from "@/lib/api-hooks";
 import { useParams, Link } from "react-router-dom";
-import { USERS_BY_ID } from "@/mock/users";
-import { SEED_LISTINGS } from "@/mock/listings";
-import { SEED_CHAINS } from "@/mock/chains";
-import { SEED_FEEDBACK } from "@/mock/feedback";
 import { MedalBadge } from "@/components/MedalBadge";
 import { ListingCard } from "@/components/ListingCard";
 import { Button } from "@/components/ui/button";
@@ -11,14 +7,14 @@ import { Mail } from "lucide-react";
 
 export default function PublicProfile() {
   const { userId } = useParams();
-  const { customUser } = useDemoUser();
-  const user = userId ? (USERS_BY_ID[userId] ?? (customUser?.id === userId ? customUser : null)) : null;
+  const { data } = useUserProfileQuery(userId);
+  const user = data?.user ?? null;
   if (!user) return <div className="container py-16"><p className="font-serif text-2xl">No such profile.</p></div>;
 
-  const offers = SEED_LISTINGS.filter((l) => l.ownerUserId === user.id && l.type === "offer");
-  const requests = SEED_LISTINGS.filter((l) => l.ownerUserId === user.id && l.type === "request");
-  const feedbackTags = Array.from(new Set(SEED_FEEDBACK.filter((f) => f.toUserId === user.id).flatMap((f) => f.tags))).slice(0, 8);
-  const contributions = SEED_CHAINS.filter((c) => c.steps.some((s) => s.fromUserId === user.id || s.toUserId === user.id)).slice(0, 3);
+  const offers = data.teachingOffers;
+  const requests = data.learningRequests;
+  const feedbackTags = data.feedbackTags;
+  const contributions = data.chainContributions;
 
   return (
     <div className="container py-10 page-fade space-y-8">

@@ -3,7 +3,7 @@ import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { STORAGE } from "@/lib/storageKeys";
 import { SEED_CHATS } from "@/mock/chats";
 import type { ChatThread, ChatMessage, Listing } from "@/mock/types";
-import { USERS_BY_ID } from "@/mock/users";
+import { getUserById } from "@/lib/appData";
 import { useDemoUser } from "@/context/DemoUserContext";
 import { useRequireDemoUser } from "@/hooks/useRequireDemoUser";
 import { Button } from "@/components/ui/button";
@@ -59,12 +59,12 @@ export function ChatPanel({ threadId, listing }: { threadId: string; listing?: L
         <p className="text-xs text-clay uppercase tracking-wide">Conversation about</p>
         <p className="font-serif text-lg text-ink">{listing?.title ?? "a Skillswap exchange"}</p>
         <p className="text-xs text-mutedInk mt-1">
-          With {thread.participantIds.map((id) => USERS_BY_ID[id]?.name ?? "someone").join(" · ")}
+          With {thread.participantIds.map((id) => getUserById(id)?.name ?? "someone").join(" · ")}
         </p>
       </header>
       <div id="chat-scroll" className="flex-1 overflow-y-auto px-5 py-4 space-y-3 bg-cream">
         {thread.messages.map((m) => {
-          const sender = USERS_BY_ID[m.senderId];
+          const sender = getUserById(m.senderId);
           const mine = user?.id === m.senderId;
           return (
             <div key={m.id} className={`flex ${mine ? "justify-end" : "justify-start"}`}>

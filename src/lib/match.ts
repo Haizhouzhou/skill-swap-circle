@@ -1,5 +1,5 @@
 import type { Listing, User } from "@/mock/types";
-import { USERS_BY_ID } from "@/mock/users";
+import { getUserById } from "@/lib/appData";
 
 export type MatchResult = { score: number; reasons: string[] };
 
@@ -12,7 +12,7 @@ export function matchScore(user: User | null, listing: Listing, opts?: { saved?:
   const reasons: string[] = [];
   let score = 0;
   if (!user) return { score: 0, reasons: [] };
-  const owner = USERS_BY_ID[listing.ownerUserId];
+  const owner = getUserById(listing.ownerUserId);
 
   // Category overlap with interests (≤25)
   const interestHit = user.interests.includes(listing.category);
@@ -92,7 +92,7 @@ export function similarListings(listing: Listing, all: Listing[], limit = 4) {
 
 export function reasonsSentence(user: User | null, listing: Listing) {
   if (!user) return "";
-  const owner = USERS_BY_ID[listing.ownerUserId];
+  const owner = getUserById(listing.ownerUserId);
   const { reasons } = matchScore(user, listing);
   if (!reasons.length) return "";
   return `${owner?.name ?? "This person"} could be a good match — ${reasons.slice(0, 3).join(", ")}.`;
