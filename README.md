@@ -2,13 +2,13 @@
 
 > **A circular economy of knowledge where everyone teaches and everyone learns**
 
-[![Live Demo](https://img.shields.io/badge/demo-live-success)](https://skill-swap-circle.vercel.app/)
+[![Live Demo](https://img.shields.io/badge/demo-live-success)](https://skill-swap-circle-bob.vercel.app/)
 [![IBM Hackathon 2026](https://img.shields.io/badge/IBM%20Hackathon-2026-blue)](https://github.com/Haizhouzhou/skill-swap-circle)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
 **🏆 IBM Hackathon 2026 Submission**
 
-[🌐 Live Demo](https://skill-swap-circle.vercel.app/) | [📖 User Story](https://www.notion.so/User-story-352dc30f9ae4803894edf13606433d66) | [🛠️ Tech Plan](https://www.notion.so/Tech-plan-352dc30f9ae480c1bc45cb783ddf9590) | [📂 GitHub](https://github.com/Haizhouzhou/skill-swap-circle)
+[🌐 Live Demo](https://https://skill-swap-circle-bob.vercel.app//) | [📖 User Story](https://www.notion.so/User-story-352dc30f9ae4803894edf13606433d66) | [🛠️ Tech Plan](https://www.notion.so/Tech-plan-352dc30f9ae480c1bc45cb783ddf9590) | [📂 GitHub](https://github.com/Haizhouzhou/skill-swap-circle)
 
 ---
 
@@ -503,7 +503,7 @@ Built with ❤️ for the IBM Hackathon 2026
 
 ## 📞 Contact
 
-- 🌐 Website: [skill-swap-circle.vercel.app](https://skill-swap-circle.vercel.app/)
+- 🌐 Website: [https://skill-swap-circle-bob.vercel.app/](https://https://skill-swap-circle-bob.vercel.app//)
 - 📧 Email: team@skillswap.circle
 - 📂 GitHub: [@Haizhouzhou](https://github.com/Haizhouzhou/skill-swap-circle)
 
@@ -539,7 +539,7 @@ Education should be a human right, not a luxury. SkillSwap Circle is our contrib
 
 **Made with 💚 for a better world**
 
-[Try SkillSwap Circle →](https://skill-swap-circle.vercel.app/)
+[Try SkillSwap Circle →](https://https://skill-swap-circle-bob.vercel.app//)
 
 ⭐ Star us on GitHub if you believe in our mission!
 
